@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\AudioControl",
+    "\\src\\components\\Editor",
+    "\\src\\components\\ThreeJS",
+    "\\src\\utils"
+  ],
+  "SelectedNode": "\\src\\components\\AudioVisualization.js",
+  "PreviewInSolutionExplorer": false
+}

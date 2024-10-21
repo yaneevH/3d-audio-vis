@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\AudioHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\AudioHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\ThreeJS\\ThreeJSScene.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\ThreeJS\\ThreeJSScene.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\ParseScript.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\utils\\ParseScript.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\AudioControl\\LoadAudioDevices.js||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\AudioControl\\LoadAudioDevices.js||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\LiveCodeEditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Editor\\LiveCodeEditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\App.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AudioHandler.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\AudioHandler.js",
+              "RelativeDocumentMoniker": "src\\utils\\AudioHandler.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\AudioHandler.js",
+              "RelativeToolTip": "src\\utils\\AudioHandler.js",
+              "ViewState": "AQIAAEwAAAAAAAAAAAAEwGUAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-21T11:25:41.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ThreeJSScene.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\ThreeJS\\ThreeJSScene.js",
+              "RelativeDocumentMoniker": "src\\components\\ThreeJS\\ThreeJSScene.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\ThreeJS\\ThreeJSScene.js",
+              "RelativeToolTip": "src\\components\\ThreeJS\\ThreeJSScene.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-20T14:06:23.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ParseScript.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\ParseScript.js",
+              "RelativeDocumentMoniker": "src\\utils\\ParseScript.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\ParseScript.js",
+              "RelativeToolTip": "src\\utils\\ParseScript.js",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAUwE0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-20T14:26:16.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoadAudioDevices.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\AudioControl\\LoadAudioDevices.js",
+              "RelativeDocumentMoniker": "src\\components\\AudioControl\\LoadAudioDevices.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\AudioControl\\LoadAudioDevices.js",
+              "RelativeToolTip": "src\\components\\AudioControl\\LoadAudioDevices.js",
+              "ViewState": "AQIAACYAAAAAAAAAAAAEwDUAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-17T13:59:22.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LiveCodeEditor.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\LiveCodeEditor.js",
+              "RelativeDocumentMoniker": "src\\components\\Editor\\LiveCodeEditor.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\LiveCodeEditor.js",
+              "RelativeToolTip": "src\\components\\Editor\\LiveCodeEditor.js",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAUwEsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-17T14:00:02.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.js",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\App.js",
+              "RelativeDocumentMoniker": "src\\App.js",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\App.js",
+              "RelativeToolTip": "src\\App.js",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAUwCkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-10-17T14:00:54.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "audioTest.html",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",
+              "RelativeDocumentMoniker": "..\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",
+              "RelativeToolTip": "..\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",
+              "ViewState": "AQIAAHsAAAAAAAAAAAAAAIsAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-10-17T14:25:45.673Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
