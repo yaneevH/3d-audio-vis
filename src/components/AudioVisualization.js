@@ -28,6 +28,7 @@ const AudioVisualization = () => {
   const roundedLow = Math.round(audioData.lowPower);
   const roundedMid = Math.round(audioData.midPower);
   const roundedHigh = Math.round(audioData.highPower);
+  //console.log(`Calculated lo-power vale from lowPower (${audioData.lowPower})`);
 
   // Limit the height of the bars to 100px maximum
   const maxBarHeight = 100;

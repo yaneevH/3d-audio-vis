@@ -1,38 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import LoadAudioDevices from './components/AudioControl/LoadAudioDevices';
 import LiveCodeEditor from './components/Editor/LiveCodeEditor';
 import AudioVisualization from './components/AudioVisualization';
 import ThreeJSScene from './components/ThreeJS/ThreeJSScene';
+import ParseScriptComponent from './components/Editor/ParseScriptComponent';
 
 function App() {
-    const [isAudioActive, setIsAudioActive] = React.useState(false);  // Audio capture status
-    const [objects, setObjects] = React.useState([]);  // Parsed objects for Three.js
+    const [isAudioActive, setIsAudioActive] = useState(false);  // Audio capture status
+    const [parsedScript, setParsedScript] = useState('');       // Script text from LiveCodeEditor
+    const [parsedObjects, setParsedObjects] = useState([]);     // Parsed objects for Three.js
 
-    const handleAudioStart = () => {
-        setIsAudioActive(true);  // Trigger audio start
-    };
+    const handleAudioStart = () => setIsAudioActive(true);
 
-    const handleParse = (parsedObjects) => {
-        setObjects(parsedObjects);  // Update objects for ThreeJSScene
-    };
+    const handleParseScript = (script) => setParsedScript(script);
+
+    const handlePushToScene = (objects) => setParsedObjects(objects);
 
     return (
         <div className="App">
             <header className="App-header">
                 <h1>3D DJ Audio Visualizer</h1>
 
-                {/* Load audio devices */}
                 <LoadAudioDevices onAudioStart={handleAudioStart} />
-
-                {/* Audio Visualization */}
                 <AudioVisualization />
 
-                {/* Live code editor */}
-                <LiveCodeEditor onParse={handleParse} />
+                <LiveCodeEditor onParse={handleParseScript} />
 
-                {/* Three.js scene */}
-                <ThreeJSScene isAudioActive={isAudioActive} objects={objects} />
+                <ParseScriptComponent
+                    script={parsedScript}
+                    onPushToScene={handlePushToScene}
+                />
+
+                <h3 style={{ textAlign: 'center', margin: '20px 0' }}>Three.js Scene</h3>
+                <ThreeJSScene
+                    isAudioActive={isAudioActive}
+                    parsedObjects={parsedObjects}
+                />
             </header>
         </div>
     );

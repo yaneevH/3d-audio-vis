@@ -1,32 +1,22 @@
+import React, { useEffect, useState } from 'react';
 import * as THREE from 'three';
-import audioHandler from './AudioHandler';
 
-function parseScriptAndUpdateObjects(script) {
+function parseScript(script) {
     const objects = [];
-
-    // Ensure the script exists and is a valid string
-    if (!script || typeof script !== 'string') {
-        throw new Error("Invalid script provided");
-    }
-
     try {
         const lines = script.trim().split('\n');
         let currentObject = null;
 
         lines.forEach(line => {
             line = line.trim();
-
-            // Ignore empty lines
             if (line === '') return;
 
-            // Detect the start of a new object, e.g., "Object1:cube {"
             if (line.includes(':') && line.includes('{')) {
                 const [objectName, objectType] = line.split(':').map(part => part.trim());
                 if (!objectType.startsWith('cube')) {
                     throw new Error(`Unsupported object type: ${objectType}`);
                 }
 
-                // Initialize a new object with default cube properties
                 const geometry = new THREE.BoxGeometry(1, 1, 1);
                 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
                 currentObject = {
@@ -41,7 +31,6 @@ function parseScriptAndUpdateObjects(script) {
                 return;
             }
 
-            // End of object block, add it to objects array
             if (line === '}') {
                 if (currentObject) {
                     objects.push(currentObject);
@@ -50,14 +39,12 @@ function parseScriptAndUpdateObjects(script) {
                 return;
             }
 
-            // Process property mappings if inside an object block
             if (currentObject) {
                 const [propName, audioMapping] = line.split('<>');
                 if (!propName || !audioMapping) {
                     throw new Error(`Invalid property mapping in line: ${line}`);
                 }
 
-                // Extract the property details and range mappings
                 const [property, range] = propName.split('(');
                 const [minRange, maxRange] = range.replace(')', '').split(',').map(Number);
                 const [audioProperty, audioRange] = audioMapping.split('(');
@@ -74,11 +61,64 @@ function parseScriptAndUpdateObjects(script) {
             }
         });
     } catch (err) {
-        console.error(`Error parsing script: ${err.message}`);
         throw new Error(`Error parsing script: ${err.message}`);
     }
 
-    return objects; // Return parsed objects with mappings
+    return objects;
 }
 
-export default parseScriptAndUpdateObjects;
+const ParseScriptComponent = ({ script, onPushToScene }) => {
+    const [log, setLog] = useState('');
+    const [objects, setObjects] = useState([]);
+    const [isPushEnabled, setIsPushEnabled] = useState(false);
+
+    useEffect(() => {
+        if (script) {
+            try {
+                const parsedObjects = parseScript(script);
+                setObjects(parsedObjects);
+                setLog(JSON.stringify(parsedObjects, null, 2));  // Show parsed objects as JSON
+                setIsPushEnabled(true);
+
+                console.dir(parsedObjects);  // Log for interactive inspection
+            } catch (error) {
+                setLog(`Error: ${error.message}`);
+                setIsPushEnabled(false);
+            }
+        }
+    }, [script]);
+
+    const handlePushObjects = () => {
+        console.log('Pushing objects to scene:', objects);
+        onPushToScene(objects); // Pass parsed objects to parent for scene update
+    };
+
+    return (
+        <div style={{ width: '80%', margin: '20px auto', textAlign: 'left' }}>
+            <h3 style={{ textAlign: 'center' }}>Parse Script Component</h3>
+
+            <div
+                style={{
+                    backgroundColor: '#000',
+                    color: '#fff',
+                    padding: '10px',
+                    fontSize: '10px',
+                    maxHeight: '150px',  // Approx. 10 lines
+                    overflowY: 'scroll',
+                    whiteSpace: 'pre-wrap',
+                    lineHeight: '1.2em',
+                }}
+            >
+                {log}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                <button onClick={handlePushObjects} disabled={!isPushEnabled}>
+                    Push Objects to Scene
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default ParseScriptComponent;
