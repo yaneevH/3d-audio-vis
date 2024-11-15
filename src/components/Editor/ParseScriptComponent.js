@@ -1,86 +1,63 @@
 import React, { useEffect, useState } from 'react';
 import * as THREE from 'three';
 
-function parseScript(script) {
-    const objects = [];
-    try {
-        const lines = script.trim().split('\n');
-        let currentObject = null;
+const ParseScriptComponent = ({ script, onPushToScene }) => {
+    const [log, setLog] = useState(''); // Log output for the component
+    const [parsedObjects, setParsedObjects] = useState([]); // Parsed Three.js objects
+    const [isPushEnabled, setIsPushEnabled] = useState(false); // Control the push button
 
-        lines.forEach(line => {
-            line = line.trim();
-            if (line === '') return;
+    // Function to process and parse the script into objects
+    const parseScript = (script) => {
+        const objects = [];
+        try {
+            const jsonData = JSON.parse(script); // Assuming the input is JSON
+            jsonData.forEach((objDef) => {
+                const geometry = getGeometry(objDef.geometry || 'cube');
+                const material = new THREE.MeshBasicMaterial({
+                    color: typeof objDef.color === 'string' ? parseInt(objDef.color, 16) : objDef.color || 0x00ff00,
+                });
 
-            if (line.includes(':') && line.includes('{')) {
-                const [objectName, objectType] = line.split(':').map(part => part.trim());
-                if (!objectType.startsWith('cube')) {
-                    throw new Error(`Unsupported object type: ${objectType}`);
-                }
-
-                const geometry = new THREE.BoxGeometry(1, 1, 1);
-                const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-                currentObject = {
-                    name: objectName,
+                const object = {
+                    name: objDef.name,
                     geometry,
                     material,
-                    position: [0, 0, 0],
-                    rotation: [0, 0, 0],
-                    scale: [1, 1, 1],
-                    mappings: []
+                    position: objDef.position || [0, 0, 0],
+                    rotation: objDef.rotation || [0, 0, 0],
+                    scale: objDef.scale || [1, 1, 1],
+                    mappings: objDef.mappings || [],
+                    layer: objDef.layer !== undefined ? objDef.layer : null, // Optional layer
                 };
-                return;
-            }
 
-            if (line === '}') {
-                if (currentObject) {
-                    objects.push(currentObject);
-                    currentObject = null;
-                }
-                return;
-            }
+                objects.push(object);
+            });
+        } catch (err) {
+            throw new Error(`Error parsing script: ${err.message}`);
+        }
+        return objects;
+    };
 
-            if (currentObject) {
-                const [propName, audioMapping] = line.split('<>');
-                if (!propName || !audioMapping) {
-                    throw new Error(`Invalid property mapping in line: ${line}`);
-                }
+    // Helper function to create geometry based on type
+    const getGeometry = (type) => {
+        switch (type) {
+            case 'cube':
+                return new THREE.BoxGeometry(1, 1, 1);
+            case 'sphere':
+                return new THREE.SphereGeometry(0.5, 32, 32);
+            default:
+                return new THREE.BoxGeometry(1, 1, 1); // Default to cube
+        }
+    };
 
-                const [property, range] = propName.split('(');
-                const [minRange, maxRange] = range.replace(')', '').split(',').map(Number);
-                const [audioProperty, audioRange] = audioMapping.split('(');
-                const [audioMin, audioMax] = audioRange.replace(')', '').split(',').map(Number);
-
-                currentObject.mappings.push({
-                    property: property.trim(),
-                    minRange,
-                    maxRange,
-                    audioProperty: audioProperty.trim(),
-                    audioMin,
-                    audioMax
-                });
-            }
-        });
-    } catch (err) {
-        throw new Error(`Error parsing script: ${err.message}`);
-    }
-
-    return objects;
-}
-
-const ParseScriptComponent = ({ script, onPushToScene }) => {
-    const [log, setLog] = useState('');
-    const [objects, setObjects] = useState([]);
-    const [isPushEnabled, setIsPushEnabled] = useState(false);
-
+    // When the script changes, parse and validate it
     useEffect(() => {
         if (script) {
             try {
                 const parsedObjects = parseScript(script);
-                setObjects(parsedObjects);
-                setLog(JSON.stringify(parsedObjects, null, 2));  // Show parsed objects as JSON
+                setParsedObjects(parsedObjects);
+                setLog(JSON.stringify(parsedObjects, null, 2)); // Display parsed objects as JSON
                 setIsPushEnabled(true);
 
-                console.dir(parsedObjects);  // Log for interactive inspection
+                console.log('Script successfully parsed:', parsedObjects); // Console log for debugging
             } catch (error) {
                 setLog(`Error: ${error.message}`);
                 setIsPushEnabled(false);
@@ -88,22 +65,24 @@ const ParseScriptComponent = ({ script, onPushToScene }) => {
         }
     }, [script]);
 
+    // Push parsed objects to the scene
     const handlePushObjects = () => {
-        console.log('Pushing objects to scene:', objects);
-        onPushToScene(objects); // Pass parsed objects to parent for scene update
+        console.log('Pushing objects to scene:', parsedObjects);
+        onPushToScene(parsedObjects);
     };
 
     return (
         <div style={{ width: '80%', margin: '20px auto', textAlign: 'left' }}>
             <h3 style={{ textAlign: 'center' }}>Parse Script Component</h3>
 
+            {/* Log box */}
             <div
                 style={{
                     backgroundColor: '#000',
                     color: '#fff',
                     padding: '10px',
                     fontSize: '10px',
-                    maxHeight: '150px',  // Approx. 10 lines
+                    maxHeight: '150px', // Approx. 10 lines
                     overflowY: 'scroll',
                     whiteSpace: 'pre-wrap',
                     lineHeight: '1.2em',
@@ -112,6 +91,7 @@ const ParseScriptComponent = ({ script, onPushToScene }) => {
                 {log}
             </div>
 
+            {/* Push button */}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                 <button onClick={handlePushObjects} disabled={!isPushEnabled}>
                     Push Objects to Scene

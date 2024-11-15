@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import audioHandler from '../../utils/AudioHandler';
 
-const ThreeJSScene = ({ parsedObjects }) => {
+const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
     const cameraRef = useRef(null);
-
+    const animationFrameIdRef = useRef(null);
     const [audioData, setAudioData] = useState({
         lowPower: 0,
         midPower: 0,
@@ -15,114 +15,133 @@ const ThreeJSScene = ({ parsedObjects }) => {
         averageVolume: 0,
     });
 
-    const audioDataRef = useRef(audioData);
-    audioDataRef.current = audioData;
-
-    // Listen to audio data updates
+    // Subscribe to audioHandler updates
     useEffect(() => {
-        const handleAudioData = (data) => setAudioData(data);
+        console.log("Subscribing to audioHandler updates");
+        const handleAudioData = (data) => {
+            //console.log("Received audio data:", data);
+            setAudioData(data); // Update state with new audio data
+        };
 
         audioHandler.addListener(handleAudioData);
-        return () => audioHandler.removeListener(handleAudioData);
+        console.log("Audio handler listener added.");
+
+        return () => {
+            audioHandler.removeListener(handleAudioData);
+            console.log("Audio handler listener removed.");
+        };
     }, []);
 
-    // Initialize and re-create scene based on parsedObjects
-    useEffect(() => {
-        if (rendererRef.current) {
-            rendererRef.current.dispose();
-            sceneRef.current = null;
-            rendererRef.current = null;
-        }
 
-        // Create a new scene
+    // Initialize the Three.js scene
+    useEffect(() => {
         const scene = new THREE.Scene();
         sceneRef.current = scene;
 
-        // Create and set up the camera
         const camera = new THREE.PerspectiveCamera(
             75,
-            mountRef.current.clientWidth / mountRef.current.clientHeight,
+            window.innerWidth / window.innerHeight,
             0.1,
             1000
         );
         camera.position.z = 10;
         cameraRef.current = camera;
 
-        // Create and set up the renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
-        // Handle resizing
         const handleResize = () => {
-            renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-            camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         };
         window.addEventListener('resize', handleResize);
 
-        // Create objects based on parsedObjects array
-        if (Array.isArray(parsedObjects) && parsedObjects.length > 0) {
-            parsedObjects.forEach((obj) => {
-                const mesh = new THREE.Mesh(obj.geometry, obj.material);
-                mesh.position.set(...obj.position);
-                mesh.rotation.set(...obj.rotation);
-                mesh.scale.set(...obj.scale);
-                mesh.name = obj.name;
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            if (animationFrameIdRef.current) {
+                cancelAnimationFrame(animationFrameIdRef.current);
+            }
+            renderer.dispose();
+        };
+    }, []);
 
-                // Store mappings for dynamic updates
-                mesh.userData.mappings = obj.mappings;
+    // Clear existing objects and add parsed objects
+    useEffect(() => {
+        if (!sceneRef.current) return;
 
-                scene.add(mesh);
-            });
+        const scene = sceneRef.current;
+
+        // Clear all existing objects
+        while (scene.children.length > 0) {
+            const child = scene.children.pop();
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) child.material.dispose();
         }
 
-        // Animation loop with dynamic audio-based updates
+        // Add new objects based on parsedObjects
+        parsedObjects.forEach((obj) => {
+            const mesh = new THREE.Mesh(obj.geometry, obj.material);
+            mesh.position.set(...obj.position);
+            mesh.rotation.set(...obj.rotation);
+            mesh.scale.set(...obj.scale);
+            mesh.name = obj.name;
+
+            // Attach mappings for animation updates
+            mesh.userData.mappings = obj.mappings;
+            scene.add(mesh);
+        });
+    }, [parsedObjects]);
+
+    // Animate the scene
+    useEffect(() => {
         const animate = () => {
-            requestAnimationFrame(animate);
+            const scene = sceneRef.current;
+            const camera = cameraRef.current;
+            const renderer = rendererRef.current;
 
-            scene.children.forEach((child) => {
-                const mappings = child.userData.mappings || [];
-                mappings.forEach(({ property, minRange, maxRange, audioProperty, audioMin, audioMax }) => {
-                    const audioValue = audioDataRef.current[audioProperty];
+            if (!scene || !camera || !renderer) return;
+
+            // Update objects based on mappings and current audio data
+            scene.children.forEach((object) => {
+                const mappings = object.userData.mappings || [];
+                mappings.forEach(({ target, range, audioProperty, audioRange }) => {
+                    const audioValue = audioData[audioProperty]; // Use current audio data
                     if (audioValue !== undefined) {
-                        const mappedValue = THREE.MathUtils.mapLinear(audioValue, audioMin, audioMax, minRange, maxRange);
+                        const mappedValue = THREE.MathUtils.mapLinear(
+                            audioValue,
+                            audioRange[0],
+                            audioRange[1],
+                            range[0],
+                            range[1]
+                        );
 
-                        // Apply mapped value to the object
-                        if (property.includes('position')) {
-                            const axis = property.split('.')[1];
-                            child.position[axis] = mappedValue;
-                        } else if (property.includes('rotation')) {
-                            const axis = property.split('.')[1];
-                            child.rotation[axis] = mappedValue;
-                        } else if (property.includes('scale')) {
-                            const axis = property.split('.')[1];
-                            child.scale[axis] = mappedValue;
+                        const [property, axis] = target.split('.');
+                        if (property && axis) {
+                            object[property][axis] = mappedValue;
                         }
                     }
                 });
             });
 
             renderer.render(scene, camera);
+
+            animationFrameIdRef.current = requestAnimationFrame(animate);
         };
+
         animate();
 
-        // Cleanup when component unmounts or parsedObjects changes
         return () => {
-            window.removeEventListener('resize', handleResize);
-            renderer.dispose();
-            rendererRef.current = null;
-            sceneRef.current = null;
+            if (animationFrameIdRef.current) {
+                cancelAnimationFrame(animationFrameIdRef.current);
+            }
         };
-    }, [parsedObjects]);
+    }, [audioData]);
 
-    return (
-        <div ref={mountRef} style={{ width: '100%', height: '500px', backgroundColor: 'black' }}>
-            <h3 style={{ textAlign: 'center', color: 'white', marginBottom: '10px' }}>Three.js Scene</h3>
-        </div>
-    );
+    return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default ThreeJSScene;
