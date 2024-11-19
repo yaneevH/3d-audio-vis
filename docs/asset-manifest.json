@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/3d-audio-vis/static/css/main.f855e6bc.css",
-    "main.js": "/3d-audio-vis/static/js/main.75975ced.js",
+    "main.js": "/3d-audio-vis/static/js/main.c4e06863.js",
     "static/js/453.6b65c3ea.chunk.js": "/3d-audio-vis/static/js/453.6b65c3ea.chunk.js",
     "index.html": "/3d-audio-vis/index.html",
     "main.f855e6bc.css.map": "/3d-audio-vis/static/css/main.f855e6bc.css.map",
-    "main.75975ced.js.map": "/3d-audio-vis/static/js/main.75975ced.js.map",
+    "main.c4e06863.js.map": "/3d-audio-vis/static/js/main.c4e06863.js.map",
     "453.6b65c3ea.chunk.js.map": "/3d-audio-vis/static/js/453.6b65c3ea.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.75975ced.js"
+    "static/js/main.c4e06863.js"
   ]
 }

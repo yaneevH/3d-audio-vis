@@ -51,6 +51,10 @@ function App() {
             // Initialize a new root for the new window
             sceneRootRef.current = ReactDOM.createRoot(container);
 
+            // Set the title of the new window
+            sceneWindowRef.current.document.title = 'Preview Scene'; // Set your custom title here
+
+
             // Ensure the window reference is reset when the window is closed
             sceneWindowRef.current.onbeforeunload = () => {
                 console.log("Window closed. Cleaning up...");
