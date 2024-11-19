@@ -29,16 +29,13 @@ function App() {
         // Open a new window for the ThreeJSScene if not already open
         if (!sceneWindowRef.current || sceneWindowRef.current.closed) {
             console.log("Creating new window for ThreeJSScene...");
-            // Open a new window
+
+            // Open a new window at half the screen dimensions
             sceneWindowRef.current = window.open(
                 '',
                 '_blank',
-                `width=${window.screen.width},height=${window.screen.height}`
+                `width=${window.screen.width / 2},height=${window.screen.height / 2},left=0,top=0`
             );
-
-            // Maximize the new window
-            sceneWindowRef.current.moveTo(0, 0);
-            sceneWindowRef.current.resizeTo(window.screen.width, window.screen.height);
 
             // Create a container div for React rendering
             const container = sceneWindowRef.current.document.createElement('div');
@@ -52,8 +49,7 @@ function App() {
             sceneRootRef.current = ReactDOM.createRoot(container);
 
             // Set the title of the new window
-            sceneWindowRef.current.document.title = 'Preview Scene'; // Set your custom title here
-
+            sceneWindowRef.current.document.title = '3D Scene Preview';
 
             // Ensure the window reference is reset when the window is closed
             sceneWindowRef.current.onbeforeunload = () => {

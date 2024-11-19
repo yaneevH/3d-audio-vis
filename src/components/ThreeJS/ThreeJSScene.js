@@ -6,7 +6,7 @@ import audioHandler from '../../utils/AudioHandler';
 // Tell CameraControls to use Three.js's renderer
 CameraControls.install({ THREE });
 
-const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
+const ThreeJSScene = ({ isAudioActive, parsedObjects, sceneWindow }) => {
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
@@ -40,7 +40,7 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
 
         const camera = new THREE.PerspectiveCamera(
             75,
-            window.innerWidth / window.innerHeight,
+            sceneWindow.innerWidth / sceneWindow.innerHeight,
             0.1,
             1000
         );
@@ -48,8 +48,8 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
         cameraRef.current = camera;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(sceneWindow.innerWidth, sceneWindow.innerHeight);
+        renderer.setPixelRatio(sceneWindow.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
@@ -57,21 +57,22 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
         const controls = new CameraControls(camera, renderer.domElement);
         controlsRef.current = controls;
 
+        // Handle resizing of the `ThreeJSScene` window
         const handleResize = () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
+            renderer.setSize(sceneWindow.innerWidth, sceneWindow.innerHeight);
+            camera.aspect = sceneWindow.innerWidth / sceneWindow.innerHeight;
             camera.updateProjectionMatrix();
         };
-        window.addEventListener('resize', handleResize);
+        sceneWindow.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            sceneWindow.removeEventListener('resize', handleResize);
             if (animationFrameIdRef.current) {
                 cancelAnimationFrame(animationFrameIdRef.current);
             }
             renderer.dispose();
         };
-    }, []);
+    }, [sceneWindow]);
 
     // Clear existing objects and add parsed objects
     useEffect(() => {
@@ -111,7 +112,7 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
             if (!scene || !camera || !renderer || !controls) return;
 
             // Update Camera Controls
-            const delta = controls.update(0.016); // ~60 FPS update
+            controls.update(0.016); // ~60 FPS update
 
             // Update objects based on mappings and current audio data
             scene.children.forEach((object) => {
