@@ -8,6 +8,6 @@
     "\\src\\components\\ThreeJS",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\components\\AudioVisualization.js",
+  "SelectedNode": "\\src\\components\\Editor\\LiveCodeEditor.js",
   "PreviewInSolutionExplorer": false
 }
