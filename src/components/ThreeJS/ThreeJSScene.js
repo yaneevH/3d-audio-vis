@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import CameraControls from 'camera-controls';
 import audioHandler from '../../utils/AudioHandler';
+
+// Tell CameraControls to use Three.js's renderer
+CameraControls.install({ THREE });
 
 const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
     const mountRef = useRef(null);
     const sceneRef = useRef(null);
     const rendererRef = useRef(null);
     const cameraRef = useRef(null);
+    const controlsRef = useRef(null); // Reference for CameraControls
     const animationFrameIdRef = useRef(null);
     const [audioData, setAudioData] = useState({
         lowPower: 0,
@@ -17,23 +22,18 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
 
     // Subscribe to audioHandler updates
     useEffect(() => {
-        console.log("Subscribing to audioHandler updates");
         const handleAudioData = (data) => {
-            //console.log("Received audio data:", data);
             setAudioData(data); // Update state with new audio data
         };
 
         audioHandler.addListener(handleAudioData);
-        console.log("Audio handler listener added.");
 
         return () => {
             audioHandler.removeListener(handleAudioData);
-            console.log("Audio handler listener removed.");
         };
     }, []);
 
-
-    // Initialize the Three.js scene
+    // Initialize the Three.js scene and Camera Controls
     useEffect(() => {
         const scene = new THREE.Scene();
         sceneRef.current = scene;
@@ -44,7 +44,7 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
             0.1,
             1000
         );
-        camera.position.z = 10;
+        camera.position.set(0, 5, 10); // Default camera position
         cameraRef.current = camera;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -52,6 +52,10 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
         renderer.setPixelRatio(window.devicePixelRatio);
         mountRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
+
+        // Initialize Camera Controls
+        const controls = new CameraControls(camera, renderer.domElement);
+        controlsRef.current = controls;
 
         const handleResize = () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
@@ -96,14 +100,18 @@ const ThreeJSScene = ({ isAudioActive, parsedObjects }) => {
         });
     }, [parsedObjects]);
 
-    // Animate the scene
+    // Animate the scene with Camera Controls
     useEffect(() => {
         const animate = () => {
             const scene = sceneRef.current;
             const camera = cameraRef.current;
             const renderer = rendererRef.current;
+            const controls = controlsRef.current;
 
-            if (!scene || !camera || !renderer) return;
+            if (!scene || !camera || !renderer || !controls) return;
+
+            // Update Camera Controls
+            const delta = controls.update(0.016); // ~60 FPS update
 
             // Update objects based on mappings and current audio data
             scene.children.forEach((object) => {

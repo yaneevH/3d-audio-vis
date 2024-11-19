@@ -28,38 +28,49 @@ function App() {
 
         // Open a new window for the ThreeJSScene if not already open
         if (!sceneWindowRef.current || sceneWindowRef.current.closed) {
+            console.log("Creating new window for ThreeJSScene...");
+            // Open a new window
             sceneWindowRef.current = window.open(
                 '',
                 '_blank',
-                'width=800,height=600'
+                `width=${window.screen.width},height=${window.screen.height}`
             );
+
+            // Maximize the new window
+            sceneWindowRef.current.moveTo(0, 0);
+            sceneWindowRef.current.resizeTo(window.screen.width, window.screen.height);
 
             // Create a container div for React rendering
             const container = sceneWindowRef.current.document.createElement('div');
+            container.style.width = '100%';
+            container.style.height = '100%';
+            sceneWindowRef.current.document.body.style.margin = '0';
+            sceneWindowRef.current.document.body.style.overflow = 'hidden';
             sceneWindowRef.current.document.body.appendChild(container);
 
-            // Initialize a root for the new window
+            // Initialize a new root for the new window
             sceneRootRef.current = ReactDOM.createRoot(container);
 
-            // Close the window when the component unmounts
+            // Ensure the window reference is reset when the window is closed
             sceneWindowRef.current.onbeforeunload = () => {
+                console.log("Window closed. Cleaning up...");
                 sceneWindowRef.current = null;
                 sceneRootRef.current = null;
             };
         }
-    };
 
-    // Render ThreeJSScene component in the new window when parsedObjects change
-    useEffect(() => {
-        if (sceneRootRef.current && parsedObjects.length > 0) {
+        // Render the ThreeJSScene
+        if (sceneRootRef.current) {
+            console.log("Rendering ThreeJSScene...");
             sceneRootRef.current.render(
                 <ThreeJSScene
                     isAudioActive={isAudioActive}
-                    parsedObjects={parsedObjects}
+                    parsedObjects={objects}
+                    sceneWindow={sceneWindowRef.current} // Pass the window reference
                 />
             );
         }
-    }, [parsedObjects, isAudioActive]);
+    };
 
     return (
         <div className="App">
