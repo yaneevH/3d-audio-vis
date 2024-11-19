@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\LiveCodeEditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\Editor\\LiveCodeEditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -53,7 +57,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ThreeJSScene.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\ThreeJS\\ThreeJSScene.js",
               "RelativeDocumentMoniker": "src\\components\\ThreeJS\\ThreeJSScene.js",
@@ -62,12 +66,24 @@
               "ViewState": "AQIAAG4AAAAAAAAAAAAQwHcAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-10-20T14:06:23.241Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "package.json",
+              "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\package.json",
+              "RelativeDocumentMoniker": "package.json",
+              "ToolTip": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\package.json",
+              "RelativeToolTip": "package.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-19T10:52:05.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "LiveCodeEditor.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\LiveCodeEditor.js",
               "RelativeDocumentMoniker": "src\\components\\Editor\\LiveCodeEditor.js",
@@ -80,7 +96,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "AudioVisualization.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\AudioVisualization.js",
               "RelativeDocumentMoniker": "src\\components\\AudioVisualization.js",
@@ -88,12 +104,11 @@
               "RelativeToolTip": "src\\components\\AudioVisualization.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-07T16:29:31.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-07T16:29:31.096Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "App.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\App.js",
               "RelativeDocumentMoniker": "src\\App.js",
@@ -101,12 +116,11 @@
               "RelativeToolTip": "src\\App.js",
               "ViewState": "AQIAADMAAAAAAAAAAAAQwEsAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-17T14:00:54.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T14:00:54.166Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ParseScript.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\ParseScript.js",
               "RelativeDocumentMoniker": "src\\utils\\ParseScript.js",
@@ -117,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ParseScriptComponent.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\Editor\\ParseScriptComponent.js",
               "RelativeDocumentMoniker": "src\\components\\Editor\\ParseScriptComponent.js",
@@ -125,12 +139,11 @@
               "RelativeToolTip": "src\\components\\Editor\\ParseScriptComponent.js",
               "ViewState": "AQIAAAQAAAAAAAAAAAAlwBIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-08T07:14:29.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-08T07:14:29.061Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ThreeJSScene_3cubes_test.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\ThreeJS\\ThreeJSScene_3cubes_test.js",
               "RelativeDocumentMoniker": "src\\components\\ThreeJS\\ThreeJSScene_3cubes_test.js",
@@ -142,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "LoadAudioDevices.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\components\\AudioControl\\LoadAudioDevices.js",
               "RelativeDocumentMoniker": "src\\components\\AudioControl\\LoadAudioDevices.js",
@@ -154,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "AudioHandler.js",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3d-audio-vis\\src\\utils\\AudioHandler.js",
               "RelativeDocumentMoniker": "src\\utils\\AudioHandler.js",
@@ -166,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "audioTest.html",
               "DocumentMoniker": "C:\\Users\\YaneevPC\\source\\repos\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",
               "RelativeDocumentMoniker": "..\\3D-DJ-AUDIO-VISUALIZER\\audioTest.html",

@@ -1,13 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
     "\\src\\components",
     "\\src\\components\\AudioControl",
     "\\src\\components\\Editor",
     "\\src\\components\\ThreeJS",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\components\\Editor\\LiveCodeEditor.js",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
